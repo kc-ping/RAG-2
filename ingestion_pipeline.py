@@ -41,12 +41,14 @@ def load_documents(docs_path="docs"):
 
     return documents
 
-def split_documents(documents, chunk_size=1000, chunk_overlap=0):
-    """Split documents into smaller chunks with overlap"""
+def split_documents(documents, chunk_size=800, chunk_overlap=150):
+    """Split documents into smaller chunks while preserving context between segments."""
     print("Splitting documents into chunks...")
     
+    # A small overlap keeps sentence-level continuity across boundaries,
+    # which is especially useful for retrieval over technical docs.
     text_splitter = CharacterTextSplitter(
-        chunk_size=chunk_size, 
+        chunk_size=chunk_size,
         chunk_overlap=chunk_overlap
     )
     
